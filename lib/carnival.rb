@@ -58,9 +58,10 @@ class Carnival
     v_count.count
   end
 
-  def summary(info)
+  def summary
     sum = {}
     sum[:visitor_count] = v_count
     sum[:revenue_earned] = revenue
+    sum
   end
 end
