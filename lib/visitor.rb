@@ -19,4 +19,13 @@ class Visitor
       return false
     end
   end
+
+  def excitement_check(ridepref)
+    @preferences.each do |pref| 
+      if pref == ridepref 
+        return true
+      end
+    end
+    false
+  end
 end

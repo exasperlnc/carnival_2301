@@ -6,6 +6,8 @@ RSpec.describe Visitor do
     @visitor1 = Visitor.new('Bruce', 54, '$10')
     @visitor2 = Visitor.new('Tucker', 36, '$5')
     @visitor3 = Visitor.new('Penny', 64, '$15')
+    @visitor1.add_preference(:gentle)
+    @visitor1.add_preference(:water)
   end
 
   it 'exists' do
@@ -20,9 +22,6 @@ RSpec.describe Visitor do
   end
 
   it 'adds preferences' do
-    @visitor1.add_preference(:gentle)
-    @visitor1.add_preference(:water)
-
     expect(@visitor1.preferences).to eq([:gentle, :water])
   end
 
@@ -30,5 +29,10 @@ RSpec.describe Visitor do
     expect(@visitor1.tall_enough?(54)).to eq(true)
     expect(@visitor1.tall_enough?(64)).to eq(false)
     expect(@visitor3.tall_enough?(64)).to eq(true)
+  end
+
+  it 'checks ridepref' do
+    expect(@visitor1.excitement_check(:water)).to eq(true)
+    expect(@visitor1.excitement_check(:thrilling)).to eq(false)
   end
 end
