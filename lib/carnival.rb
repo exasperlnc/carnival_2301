@@ -1,6 +1,6 @@
 require_relative 'ride'
 class Carnival
-  attr_reader :name, :duration, :rides
+  attr_reader :name, :duration, :rides, :summary
   def initialize(info)
     @name = info[:name]
     @duration = info[:duration]
@@ -50,21 +50,17 @@ class Carnival
   def revenue
     rev_compiler.sum
   end
+  def visitor_count
+    v_count = []
+    @rides.each do |ride|
+      v_count << ride.rider_log.keys
+    end
+    v_count.count
+  end
+
+  def summary(info)
+    sum = {}
+    sum[:visitor_count] = v_count
+    sum[:revenue_earned] = revenue
+  end
 end
-
-
-
-
-
-
-
-
-
-
-
-# revenue_compiler = []
-#   revenue_counter = revenue_compiler.sum
-#   @rides.each do |ride|
-#     revenue_compiler << ride.total_revenue
-#   end
-# revenue_counter
