@@ -77,4 +77,16 @@ RSpec.describe Ride do
 
     expect(@ride3.rider_log.count).to eq(0)
   end
+
+
+  it 'returns total riders' do
+    @ride1.board_rider(@visitor1)
+    @ride1.board_rider(@visitor2)
+    @ride1.board_rider(@visitor1)
+    @ride1.board_rider(@visitor2)
+    @ride1.board_rider(@visitor1)
+    @ride1.board_rider(@visitor2)
+
+    expect(@ride1.total_riders).to eq(6)
+  end
 end

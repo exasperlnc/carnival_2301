@@ -46,4 +46,8 @@ class Ride
     end
     false
   end
+
+  def total_riders
+    rider_log.values.sum
+  end
 end
