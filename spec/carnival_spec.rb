@@ -36,6 +36,7 @@ RSpec.describe Carnival do
   it 'has most pop ride' do
     @carnival.add_ride(@ride1)
     @carnival.add_ride(@ride2)
+    @carnival.add_ride(@ride3)
     @ride1.board_rider(@visitor1)
     @ride1.board_rider(@visitor2)
     @ride1.board_rider(@visitor3)
@@ -49,12 +50,64 @@ RSpec.describe Carnival do
   it 'has two rides that tie for most popular' do
     @carnival.add_ride(@ride1)
     @carnival.add_ride(@ride2)
+    @carnival.add_ride(@ride3)
     @ride1.board_rider(@visitor1)
     @ride1.board_rider(@visitor3)
     @ride2.board_rider(@visitor1)
     @ride2.board_rider(@visitor3)
 
     expect(@carnival.pop_ride).to eq([@ride1, @ride2])
+  end
+
+  it 'has most profitable ride' do
+    @carnival.add_ride(@ride1)
+    @carnival.add_ride(@ride2)
+    @carnival.add_ride(@ride3)
+    @ride1.board_rider(@visitor1)
+    @ride1.board_rider(@visitor2)
+    @ride1.board_rider(@visitor3)
+    @ride2.board_rider(@visitor1)
+    @ride2.board_rider(@visitor2)
+
+
+    expect(@carnival.prof_ride).to eq([@ride2])
+  end
+
+  it 'has two rides that tie for most profitable' do
+    @carnival.add_ride(@ride1)
+    @carnival.add_ride(@ride2)
+    @carnival.add_ride(@ride3)
+    @ride1.board_rider(@visitor1)
+    @ride1.board_rider(@visitor2)
+    @ride1.board_rider(@visitor3)
+    @ride1.board_rider(@visitor1)
+    @ride1.board_rider(@visitor1)
+    @ride2.board_rider(@visitor1)
+
+
+    expect(@carnival.prof_ride).to eq([@ride1, @ride2])
+  end
+
+  it 'compiles rev' do
+    @carnival.add_ride(@ride1)
+    @carnival.add_ride(@ride2)
+    @carnival.add_ride(@ride3)
+    @ride1.board_rider(@visitor1)
+    @ride2.board_rider(@visitor2)
+    @ride3.board_rider(@visitor3)
+
+    expect(@carnival.rev_compiler).to eq([1,5,0])
+  end
+
+  it 'calculates total carnival revenue' do
+    @carnival.add_ride(@ride1)
+    @carnival.add_ride(@ride2)
+    @carnival.add_ride(@ride3)
+    @ride1.board_rider(@visitor1)
+    @ride2.board_rider(@visitor2)
+    @ride3.board_rider(@visitor3)
+
+    expect(@carnival.revenue).to eq(6)
   end
 
 end
