@@ -35,4 +35,9 @@ RSpec.describe Visitor do
     expect(@visitor1.excitement_check(:water)).to eq(true)
     expect(@visitor1.excitement_check(:thrilling)).to eq(false)
   end
+
+  it 'charges' do
+    @visitor1.charge(5)
+    expect(@visitor1.spending_money).to eq(5)
+  end
 end

@@ -28,4 +28,8 @@ class Visitor
     end
     false
   end
+
+  def charge(price)
+    @spending_money -= price
+  end
 end
