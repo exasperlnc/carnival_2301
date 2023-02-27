@@ -36,4 +36,14 @@ class Ride
   def log_rider(visitor)
     @rider_log[visitor] += 1
   end
+
+  def board_rider(visitor)
+    if compare_excitement(visitor) && check_height(visitor) && check_spending_money(visitor)
+      visitor.charge(@admission_fee)
+      add_revenue
+      log_rider(visitor)
+      return visitor
+    end
+    false
+  end
 end

@@ -11,6 +11,8 @@ RSpec.describe Ride do
     @expensive_ride = Ride.new({ name: 'Big Ferris Wheel', min_height: 36, admission_fee: 100, excitement: :gentle })
     @ride3 = Ride.new({ name: 'Roller Coaster', min_height: 54, admission_fee: 2, excitement: :thrilling })
     @visitor1.add_preference(:gentle)
+    @visitor2.add_preference(:gentle)
+    @visitor3.add_preference(:gentle)
     @visitor1.add_preference(:water)
   end
 
@@ -58,5 +60,21 @@ RSpec.describe Ride do
   it 'checks spending money' do
     expect(@ride1.check_spending_money(@visitor1)).to eq(true)
     expect(@expensive_ride.check_spending_money(@visitor1)).to eq(false)
+  end
+
+  it 'boards rider' do
+    @ride1.board_rider(@visitor1)
+    @ride1.board_rider(@visitor2)
+    @ride1.board_rider(@visitor3)
+
+    expect(@ride1.rider_log.count).to eq(3)
+  end
+
+  it 'does not board rider' do
+    @ride3.board_rider(@visitor1)
+    @ride3.board_rider(@visitor2)
+    @ride3.board_rider(@visitor3)
+
+    expect(@ride3.rider_log.count).to eq(0)
   end
 end
