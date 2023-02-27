@@ -7,7 +7,7 @@ class Ride
     @admission_fee = info[:admission_fee]
     @excitement = info[:excitement]
     @total_revenue = 0
-    @rider_log = {}
+    @rider_log = Hash.new(0)
   end
 
   def compare_excitement(visitor)
@@ -26,4 +26,14 @@ class Ride
     end
   end
 
+  def check_spending_money(visitor)
+    if visitor.spending_money >= @admission_fee
+      return true
+    end
+    false
+  end
+
+  def log_rider(visitor)
+    @rider_log[visitor] += 1
+  end
 end
